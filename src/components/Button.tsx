@@ -1,13 +1,13 @@
 import React from 'react'
 
 type Props = {
-  onClick: (text: string) => void //function with string param
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const Button = ({ onClick}: Props) => {
+const Button: React.FC<Props> = ({ onClick, children }) => {
   return (
-    <button onClick={() => onClick('Hi')}>
-      Click Me!
+    <button onClick={onClick}>
+      {children}
     </button>
   )
 }
