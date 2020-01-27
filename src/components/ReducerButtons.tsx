@@ -1,12 +1,11 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useRef } from 'react'
+import { useClickOutside } from './useClickOutside'
 
 const initialState = {
   rValue: true,
 }
 
-type Action = {
-  type: string,
-}
+type Action = { type: 'one' } | { type: 'two' }
 
 type State = {
   rValue: boolean,
@@ -24,11 +23,14 @@ function reducer(state: State, action: Action) {
 }
 
 const ReducerButtons = () => {
-
   const [state, dispatch] = useReducer(reducer, initialState)
+  const ref = useRef<HTMLDivElement>(null!)
+  useClickOutside(ref, ()=>{
+    console.log('clicked outside')
+  })
 
   return (
-    <div>
+    <div ref={ref} >
       {state && state.rValue && 
         <h1>Visible</h1>
       }
